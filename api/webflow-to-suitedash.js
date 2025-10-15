@@ -20,17 +20,17 @@ export default async function handler(req, res) {
 
   try {
     const suiteDashRes = await fetch("https://app.suitedash.com/secure-api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `SuiteDash-API ${process.env.SUITE_DASH_PUBLIC_ID}:${process.env.SUITE_DASH_SECRET_KEY}`
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        email: email
-      })
-    });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `SuiteDash-API ${process.env.SUITE_DASH_PUBLIC_ID}:${process.env.SUITE_DASH_SECRET_KEY}`
+  },
+  body: JSON.stringify({
+    first_name: firstName,
+    last_name: lastName,
+    email: email
+  })
+});
 
     const data = await suiteDashRes.json();
 
