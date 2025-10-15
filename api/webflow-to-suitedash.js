@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   const lastName = nameParts.slice(1).join(" ") || " ";
 
   try {
-    const suiteDashRes = await fetch("https://app.suitedash.com/secure-api", {
+    const suiteDashRes = await fetch("https://app.suitedash.com/secure-api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
