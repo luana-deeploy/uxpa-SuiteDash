@@ -18,14 +18,34 @@ export default async function handler(req, res) {
   const firstName = nameParts[0];
   const lastName = nameParts.slice(1).join(" ") || " ";
 
-  try {
-    const suiteDashRes = await fetch("https://app.suitedash.com/secure-api/contact", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "X-Public-ID": process.env.SUITE_DASH_PUBLIC_ID,
-    "X-Secret-Key": process.env.SUITE_DASH_SECRET_KEY
-  },
+ try {
+  const suiteDashRes = await fetch("https://app.suitedash.com/secure-api/contact", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-Public-ID": process.env.SUITE_DASH_PUBLIC_ID,
+      "X-Secret-Key": process.env.SUITE_DASH_SECRET_KEY
+    },
+    body: JSON.stringify({
+      first_name: firstName,
+      last_name: lastName,
+      email: email
+    })
+  });
+
+  const data = await suiteDashRes.json();
+
+  if (!suiteDashRes.ok) {
+    console.error("Erro SuiteDash:", data);
+    return res.status(suiteDashRes.status).json({ error: data.message || "Failed to create contact" });
+  }
+
+  res.status(200).json({ success: true, client: data });
+} catch (err) {
+  console.error("Erro interno:", err);
+  res.status(500).json({ error: "Internal server error" });
+}
+
   body: JSON.stringify({
     first_name: firstName,
     last_name: lastName,
