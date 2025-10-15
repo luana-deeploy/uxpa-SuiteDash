@@ -12,6 +12,7 @@ export default async function handler(req, res) {
   const fullName = payload.data?.Name || "";
   const email = payload.data?.Email || "";
 
+
   if (!fullName || !email) {
     return res.status(400).json({ error: "Missing required fields" });
   }
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
   // 🔹 Separar primeiro e último nome
   const nameParts = fullName.trim().split(" ");
   const firstName = nameParts[0];
-  const lastName = nameParts.slice(1).join(" ") || " ";
+  const lastName = nameParts.slice(1).join(" ") || "N/A";
 
   try {
     // 🔹 Criar contato no SuiteDash
@@ -33,7 +34,8 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         first_name: firstName,
         last_name: lastName,
-        email: email
+        email: email,
+        role: "Supporter"
       })
     });
 
