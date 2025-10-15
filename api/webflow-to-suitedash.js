@@ -23,8 +23,16 @@ export default async function handler(req, res) {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
-    "Authorization": `SuiteDash-API ${process.env.SUITE_DASH_PUBLIC_ID}:${process.env.SUITE_DASH_SECRET_KEY}`
+    "X-Public-ID": process.env.SUITE_DASH_PUBLIC_ID,
+    "X-Secret-Key": process.env.SUITE_DASH_SECRET_KEY
   },
+  body: JSON.stringify({
+    first_name: firstName,
+    last_name: lastName,
+    email: email
+  })
+});
+
   body: JSON.stringify({
     first_name: firstName,
     last_name: lastName,
