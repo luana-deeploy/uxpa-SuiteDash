@@ -1,6 +1,4 @@
 // /api/webflow-to-suitedash.js
-import fetch from "node-fetch";
-
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).send("Method Not Allowed");
 
@@ -19,7 +17,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 🔹 Chamada à API do SuiteDash
+    // 🔹 Chamada à API do SuiteDash usando fetch nativo
     const suiteDashRes = await fetch("https://app.suitedash.com/secure-api/clients", {
       method: "POST",
       headers: {
